@@ -1,0 +1,37 @@
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./config/proxy.conf:/etc/nginx/conf.d/default.conf
+    restart: 'unless-stopped'
+    ports:
+      - '80:80'
+    depends_on:
+      - motioneye
+      - mkdocs
+
+  motioneye:
+    image: jshridha/motioneye:latest
+    container_name: motioneye
+    environment:
+      TIMEZONE: "Australia/Perth"
+      PUID: "99"
+      PGID: "100"
+    volumes:
+      - ./motioneye/config:/config #Config Storage
+      - ./motioneye/storage:/home/nobody/media  #File Storage
+    # To setup a camera in the child conatiner simply uncomment the bellow and add a device link
+    #device:
+    #  - /dev/ttyUSB0
+    ports:
+      - 8081:8081
+      - 8765:8765
+    restart: always
+
+  mkdocs:
+    image: squidfunk/mkdocs-material:latest
+    container_name: mkdocs
+    ports:
+      - 8000:8000
+    volumes:
+      - ./docs:/docs
