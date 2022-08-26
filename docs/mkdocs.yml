@@ -1,5 +1,5 @@
 site_name: Motion Eye Docs
-site_url: http://localhost/docs
+site_url: http://127.0.0.1/docs
 theme:
   name: material
   palette:
