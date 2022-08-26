@@ -11,18 +11,18 @@ services:
       - mkdocs
 
   motioneye:
-    image: jshridha/motioneye:latest
+    image: ccrisan/motioneye:dev-amd64
     container_name: motioneye
     environment:
       TIMEZONE: "Australia/Perth"
-      PUID: "99"
-      PGID: "100"
+      PUID: "0"
+      PGID: "0"
     volumes:
       - ./motioneye/config:/config #Config Storage
       - ./motioneye/storage:/home/nobody/media  #File Storage
-    # To setup a camera in the child conatiner simply uncomment the bellow and add a device link
-    #device:
-    #  - /dev/ttyUSB0
+    devices:
+     - /dev/video0
+     - /dev/video2
     ports:
       - 8081:8081
       - 8765:8765
