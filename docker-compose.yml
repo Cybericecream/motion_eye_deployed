@@ -18,7 +18,7 @@ services:
       PUID: "0"
       PGID: "0"
     volumes:
-      - ./config/motioneye/config:/etc/motioneye #Config Storage
+      - ./config/motioneye:/etc/motioneye #Config Storage
       - ./motioneye/storage:/var/lib/motioneye  #File Storage
     devices:
      - /dev/video0
