@@ -18,13 +18,14 @@ services:
       PUID: "0"
       PGID: "0"
     volumes:
-      - ./motioneye/config:/config #Config Storage
-      - ./motioneye/storage:/home/nobody/media  #File Storage
+      - ./config/motioneye/config:/etc/motioneye #Config Storage
+      - ./motioneye/storage:/var/lib/motioneye  #File Storage
     devices:
      - /dev/video0
      - /dev/video2
     ports:
       - 8081:8081
+      - 8082:8082
       - 8765:8765
     restart: always
 
